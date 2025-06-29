@@ -2,34 +2,28 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private int hundredMoney = 5;
-    private int fiveHundredMoney = 2;
-    private int thousandMoney = 2;
-    private int fiveThousandMoney;
-    private int tenThousandMoney;
-/*     [SerializeField] private int colorPawn;
-    [SerializeField] private int investment;
-    [SerializeField] private int monsterCharge;
-    [SerializeField] private int loan; */
+    Bank bank;
 
-    void Start()
+    private int hundredMoneyPlayer = 5;
+    private int fiveHundredMoneyPlayer = 2;
+    private int thousandMoneyPlayer = 2;
+    private int fiveThousandMoneyPlayer;
+    private int tenThousandMoneyPlayer;
+    /*     [SerializeField] private int colorPawn;
+        [SerializeField] private int investment;
+        [SerializeField] private int monsterCharge;
+        [SerializeField] private int loan; */
+
+    private void Awake()
     {
-        TotalMoney(hundredMoney, fiveHundredMoney, thousandMoney, fiveThousandMoney, tenThousandMoney);
+        bank = GetComponent<Bank>();
+    }
+    private void Start()
+    {
+        bank.TotalMoney(hundredMoneyPlayer, fiveHundredMoneyPlayer, thousandMoneyPlayer, fiveThousandMoneyPlayer, tenThousandMoneyPlayer);
     }
 
-    private void TotalMoney(int hMoney, int fHMoney, int tMoney, int fTMoney, int tTMoney)
-    {
-        int totalMoney;
 
-        hMoney = hundredMoney * 100;
-        fHMoney = fiveHundredMoney * 500;
-        tMoney = thousandMoney * 1000;
-        fTMoney = fiveThousandMoney * 5000;
-        tTMoney = tenThousandMoney * 10000;
-
-        totalMoney = hMoney + fHMoney + tMoney + fTMoney + tTMoney;
-        Debug.Log(totalMoney);
-    }
 
 
 }
