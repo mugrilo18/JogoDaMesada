@@ -9,17 +9,28 @@ public class Bank : MonoBehaviour
     private int fiveThousandMoney;
     private int tenThousandMoney;
 
-    public void TotalMoney(int hMoney, int fHMoney, int tMoney, int fTMoney, int tTMoney)
+    public void TotalMoney(int hundredMoneyPlayer, int fiveHundredMoneyPlayer, int thousandMoneyPlayer, int fiveThousandMoneyPlayer, int tenThousandMoneyPlayer)
     {
         int totalMoney;
 
-        hundredMoney = hMoney * 100;
-        fiveHundredMoney = fHMoney * 500;
-        thousandMoney = tMoney * 1000;
-        fiveThousandMoney = fTMoney * 5000;
-        tenThousandMoney = tTMoney * 10000;
+        hundredMoney = hundredMoneyPlayer * 100;
+        fiveHundredMoney = fiveHundredMoneyPlayer * 500;
+        thousandMoney = thousandMoneyPlayer * 1000;
+        fiveThousandMoney = fiveThousandMoneyPlayer * 5000;
+        tenThousandMoney = tenThousandMoneyPlayer * 10000;
 
         totalMoney = hundredMoney + fiveHundredMoney + thousandMoney + fiveThousandMoney + tenThousandMoney;
-        Debug.Log(totalMoney);
+        Debug.Log("Dinheiro total: R$" + totalMoney + ",00");
+    }
+
+    public void ConvertToHundred(int fiveHundredMoneyPlayer, int thousandMoneyPlayer, int fiveThousandMoneyPlayer, int tenThousandMoneyPlayer)
+    {
+        fiveHundredMoneyPlayer = fiveHundredMoney / 100;
+        thousandMoneyPlayer = thousandMoney / 100;
+        fiveThousandMoneyPlayer = fiveThousandMoney / 100;
+        tenThousandMoneyPlayer = tenThousandMoney / 100;
+
+        Debug.Log(fiveHundredMoneyPlayer + "X R$100,00 \n" + thousandMoneyPlayer + "X R$100,00 \n" + fiveThousandMoneyPlayer + "X R$100,00 \n" + tenThousandMoneyPlayer + "X R$100,00 \n");
+
     }
 }
