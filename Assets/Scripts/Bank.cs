@@ -14,7 +14,7 @@ public class Bank : MonoBehaviour
         player = GetComponent<Player>();
     }
 
-    public void TotalMoney()
+    public string TotalMoney()
     {
         int totalMoney;
 
@@ -26,6 +26,8 @@ public class Bank : MonoBehaviour
 
         totalMoney = hundredMoney + fiveHundredMoney + thousandMoney + fiveThousandMoney + tenThousandMoney;
         Debug.Log("Dinheiro total: R$" + totalMoney + ",00");
+
+        return totalMoney.ToString();
     }
 
     public void ConvertToHundred()
