@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Bank : MonoBehaviour
@@ -8,6 +9,42 @@ public class Bank : MonoBehaviour
     private int thousandMoney;
     private int fiveThousandMoney;
     private int tenThousandMoney;
+
+    public enum QuantityConvert
+    {
+        // Convert to R$100,00
+        FiveHundredToHundred,
+        ThousandToHundred,
+        FiveThousandToHundred,
+        TenThousandToHundred,
+
+        // Convert to R$500,00
+        HundredToFiveHundred,
+        ThousandToFiveHundred,
+        FiveThousandToFiveHundred,
+        TenThousandToFiveHundred,
+
+        // Convert to R$1000,00
+        HundredToThousand,
+        FiveHundredToThousand,
+        FiveThousandToThousand,
+        TenThousandToThousand,
+
+        // Convert to R$5000,00
+        HundredToFiveThousand,
+        FiveHundredToFiveThousand,
+        ThousandToFiveThousand,
+        TenThousandToFiveThousand,
+
+        // Convert to R$10000,00
+        HundredToTenThousand,
+        FiveHundredToTenThousand,
+        ThousandToTenThousand,
+        FiveThousandToTenThousand,
+
+    }
+
+    [SerializeField] private QuantityConvert quantityConvert;
 
     void Awake()
     {
@@ -25,181 +62,162 @@ public class Bank : MonoBehaviour
         tenThousandMoney = player.tenThousandMoneyPlayer * 10000;
 
         totalMoney = hundredMoney + fiveHundredMoney + thousandMoney + fiveThousandMoney + tenThousandMoney;
-        Debug.Log("Dinheiro total: R$" + totalMoney + ",00");
 
         return totalMoney.ToString();
     }
 
-    public void ConvertToHundred()
+    public void ConvertMoney()
     {
-        if (player.fiveHundredMoneyPlayer >= 1)
+        switch (quantityConvert)
         {
-            player.fiveHundredMoneyPlayer -= 1;
-            player.hundredMoneyPlayer += 5;
-        }
-
-        if (player.thousandMoneyPlayer >= 1)
-        {
-            player.thousandMoneyPlayer -= 1;
-            player.hundredMoneyPlayer += 10;
-        }
-
-        if (player.fiveThousandMoneyPlayer >= 1)
-        {
-            player.fiveThousandMoneyPlayer -= 1;
-            player.hundredMoneyPlayer += 50;
-        }
-
-        if (player.tenThousandMoneyPlayer >= 1)
-        {
-            player.tenThousandMoneyPlayer -= 1;
-            player.hundredMoneyPlayer += 100;
-        }
-
-        Debug.Log("Todas as notas convertidas para R$100,00");
-        Debug.Log(player.hundredMoneyPlayer + "X R$100,00 \n" + player.fiveHundredMoneyPlayer + "X R$500,00 \n" + player.thousandMoneyPlayer + "X R$1000,00 \n" + player.fiveThousandMoneyPlayer + "X R$5000,00 \n" + player.tenThousandMoneyPlayer + "X R$10000,00 \n");
-
-
-    }
-
-    public void ConvertToFiveHundred()
-    {
-        if (player.hundredMoneyPlayer >= 5)
-        {
-            player.hundredMoneyPlayer -= 5;
-            player.fiveHundredMoneyPlayer++;
-        }
-
-        if (player.thousandMoneyPlayer >= 1)
-        {
-            player.thousandMoneyPlayer -= 1;
-            player.fiveHundredMoneyPlayer += 2;
-        }
-
-        if (player.fiveThousandMoneyPlayer >= 1)
-        {
-            player.fiveThousandMoneyPlayer -= 1;
-            player.fiveHundredMoneyPlayer += 10;
-        }
-
-        if (player.tenThousandMoneyPlayer >= 1)
-        {
-            player.tenThousandMoneyPlayer -= 1;
-            player.fiveHundredMoneyPlayer += 20;
-        }
-
-        Debug.Log("Todas as notas convertidas para R$500,00");
-        Debug.Log(player.hundredMoneyPlayer + "X R$100,00 \n" + player.fiveHundredMoneyPlayer + "X R$500,00 \n" + player.thousandMoneyPlayer + "X R$1000,00 \n" + player.fiveThousandMoneyPlayer + "X R$5000,00 \n" + player.tenThousandMoneyPlayer + "X R$10000,00 \n");
-    }
-
-    public void ConvertToThousand()
-    {
-        if (player.hundredMoneyPlayer >= 10)
-        {
-            player.hundredMoneyPlayer -= 10;
-            player.thousandMoneyPlayer++;
-        }
-
-        if (player.fiveHundredMoneyPlayer >= 2)
-        {
-            player.fiveHundredMoneyPlayer -= 2;
-            player.thousandMoneyPlayer++;
-        }
-
-        if (player.fiveThousandMoneyPlayer >= 1)
-        {
-            player.fiveThousandMoneyPlayer -= 1;
-            player.thousandMoneyPlayer += 5;
-        }
-
-        if (player.tenThousandMoneyPlayer >= 1)
-        {
-            player.tenThousandMoneyPlayer -= 1;
-            player.thousandMoneyPlayer += 10;
-        }
-
-        Debug.Log("Todas as notas convertidas para R$1000,00");
-        Debug.Log(player.hundredMoneyPlayer + "X R$100,00 \n" + player.fiveHundredMoneyPlayer + "X R$500,00 \n" + player.thousandMoneyPlayer + "X R$1000,00 \n" + player.fiveThousandMoneyPlayer + "X R$5000,00 \n" + player.tenThousandMoneyPlayer + "X R$10000,00 \n");
-    }
-    public void ConvertToFiveThousand()
-    {
-        if (player.hundredMoneyPlayer >= 50)
-        {
-            player.hundredMoneyPlayer -= 50;
-            player.fiveThousandMoneyPlayer++;
-        }
-
-        if (player.fiveHundredMoneyPlayer >= 10)
-        {
-            player.fiveHundredMoneyPlayer -= 10;
-            player.fiveThousandMoneyPlayer++;
-        }
-
-        if (player.thousandMoneyPlayer >= 5)
-        {
-            player.thousandMoneyPlayer -= 5;
-            player.fiveThousandMoneyPlayer++;
-        }
-
-        if (player.tenThousandMoneyPlayer >= 1)
-        {
-            player.tenThousandMoneyPlayer -= 1;
-            player.fiveThousandMoneyPlayer += 2;
-        }
-
-        Debug.Log("Todas as notas convertidas para R$5000,00");
-        Debug.Log(player.hundredMoneyPlayer + "X R$100,00 \n" + player.fiveHundredMoneyPlayer + "X R$500,00 \n" + player.thousandMoneyPlayer + "X R$1000,00 \n" + player.fiveThousandMoneyPlayer + "X R$5000,00 \n" + player.tenThousandMoneyPlayer + "X R$10000,00 \n");
-    }
-    public void ConvertToTenThousand()
-    {
-        if (player.hundredMoneyPlayer >= 100)
-        {
-            player.hundredMoneyPlayer -= 100;
-            player.tenThousandMoneyPlayer++;
-        }
-
-        if (player.fiveHundredMoneyPlayer >= 20)
-        {
-            player.fiveHundredMoneyPlayer -= 20;
-            player.tenThousandMoneyPlayer++;
-        }
-
-        if (player.thousandMoneyPlayer >= 10)
-        {
-            player.thousandMoneyPlayer -= 10;
-            player.tenThousandMoneyPlayer++;
-        }
-        
-        if (player.fiveThousandMoneyPlayer >= 2)
-        {
-            player.fiveThousandMoneyPlayer -= 2;
-            player.tenThousandMoneyPlayer++;
-        }
-
-        Debug.Log("Todas as notas convertidas para R$5000,00");
-        Debug.Log(player.hundredMoneyPlayer + "X R$100,00 \n" + player.fiveHundredMoneyPlayer + "X R$500,00 \n" + player.thousandMoneyPlayer + "X R$1000,00 \n" + player.fiveThousandMoneyPlayer + "X R$5000,00 \n" + player.tenThousandMoneyPlayer + "X R$10000,00 \n");
-    }
-    
-    public void ConvertMoney(int convertMoney)
-    {
-        switch (convertMoney)
-        {
-            case 1:
-                ConvertToHundred();
+            // Convert to R$100,00
+            case QuantityConvert.FiveHundredToHundred:
+                if (player.fiveHundredMoneyPlayer >= 1)
+                {
+                    player.fiveHundredMoneyPlayer -= 1;
+                    player.hundredMoneyPlayer += 5;
+                }
                 break;
-            case 2:
-                ConvertToFiveHundred();
+            case QuantityConvert.ThousandToHundred:
+                if (player.thousandMoneyPlayer >= 1)
+                {
+                    player.thousandMoneyPlayer -= 1;
+                    player.hundredMoneyPlayer += 10;
+                }
                 break;
-            case 3:
-                ConvertToThousand();
+            case QuantityConvert.FiveThousandToHundred:
+                if (player.fiveThousandMoneyPlayer >= 1)
+                {
+                    player.fiveThousandMoneyPlayer -= 1;
+                    player.hundredMoneyPlayer += 50;
+                }
                 break;
-            case 4:
-                ConvertToFiveThousand();
+            case QuantityConvert.TenThousandToHundred:
+                if (player.tenThousandMoneyPlayer >= 1)
+                {
+                    player.tenThousandMoneyPlayer -= 1;
+                    player.hundredMoneyPlayer += 100;
+                }
                 break;
-            case 5:
-                ConvertToTenThousand();
+
+            //Convert to R$500,00
+            case QuantityConvert.HundredToFiveHundred:
+                if (player.hundredMoneyPlayer >= 5)
+                {
+                    player.hundredMoneyPlayer -= 5;
+                    player.fiveHundredMoneyPlayer++;
+                }
+                break;
+            case QuantityConvert.ThousandToFiveHundred:
+                if (player.thousandMoneyPlayer >= 1)
+                {
+                    player.thousandMoneyPlayer -= 1;
+                    player.fiveHundredMoneyPlayer += 2;
+                }
+                break;
+            case QuantityConvert.FiveThousandToFiveHundred:
+                if (player.fiveThousandMoneyPlayer >= 1)
+                {
+                    player.fiveThousandMoneyPlayer -= 1;
+                    player.fiveHundredMoneyPlayer += 10;
+                }
+                break;
+            case QuantityConvert.TenThousandToFiveHundred:
+                if (player.tenThousandMoneyPlayer >= 1)
+                {
+                    player.tenThousandMoneyPlayer -= 1;
+                    player.fiveHundredMoneyPlayer += 20;
+                }
+                break;
+
+            // Convert to R$1000,00
+            case QuantityConvert.HundredToThousand:
+                if (player.hundredMoneyPlayer >= 10)
+                {
+                    player.hundredMoneyPlayer -= 10;
+                    player.thousandMoneyPlayer++;
+                }
+                break;
+            case QuantityConvert.FiveHundredToThousand:
+                if (player.fiveHundredMoneyPlayer >= 2)
+                {
+                    player.fiveHundredMoneyPlayer -= 2;
+                    player.thousandMoneyPlayer++;
+                }
+                break;
+            case QuantityConvert.FiveThousandToThousand:
+                if (player.fiveThousandMoneyPlayer >= 1)
+                {
+                    player.fiveThousandMoneyPlayer -= 1;
+                    player.thousandMoneyPlayer += 5;
+                }
+                break;
+            case QuantityConvert.TenThousandToThousand:
+                if (player.tenThousandMoneyPlayer >= 1)
+                {
+                    player.tenThousandMoneyPlayer -= 1;
+                    player.thousandMoneyPlayer += 10;
+                }
+                break;
+            // Convert to R$5000,00
+            case QuantityConvert.HundredToFiveThousand:
+                if (player.hundredMoneyPlayer >= 50)
+                {
+                    player.hundredMoneyPlayer -= 50;
+                    player.fiveThousandMoneyPlayer++;
+                }
+                break;
+            case QuantityConvert.FiveHundredToFiveThousand:
+                if (player.fiveHundredMoneyPlayer >= 10)
+                {
+                    player.fiveHundredMoneyPlayer -= 10;
+                    player.fiveThousandMoneyPlayer++;
+                }
+                break;
+            case QuantityConvert.ThousandToFiveThousand:
+                if (player.thousandMoneyPlayer >= 5)
+                {
+                    player.thousandMoneyPlayer -= 5;
+                    player.fiveThousandMoneyPlayer++;
+                }
+                break;
+            case QuantityConvert.TenThousandToFiveThousand:
+                if (player.tenThousandMoneyPlayer >= 1)
+                {
+                    player.tenThousandMoneyPlayer -= 1;
+                    player.fiveThousandMoneyPlayer += 2;
+                }
+                break;
+            // Convert to R$10000,00
+            case QuantityConvert.HundredToTenThousand:
+                if (player.hundredMoneyPlayer >= 100)
+                {
+                    player.hundredMoneyPlayer -= 100;
+                    player.tenThousandMoneyPlayer++;
+                }
+                break;
+            case QuantityConvert.FiveHundredToTenThousand:
+                if (player.fiveHundredMoneyPlayer >= 20)
+                {
+                    player.fiveHundredMoneyPlayer -= 20;
+                    player.tenThousandMoneyPlayer++;
+                }
+                break;
+            case QuantityConvert.ThousandToTenThousand:
+                if (player.thousandMoneyPlayer >= 10)
+                {
+                    player.thousandMoneyPlayer -= 10;
+                    player.tenThousandMoneyPlayer++;
+                }
+                break;
+            case QuantityConvert.FiveThousandToTenThousand:
+                if (player.fiveThousandMoneyPlayer >= 2)
+                {
+                    player.fiveThousandMoneyPlayer -= 2;
+                    player.tenThousandMoneyPlayer++;
+                }
                 break;
         }
-        
+
     }
 }
